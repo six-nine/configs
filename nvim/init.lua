@@ -86,34 +86,14 @@ nvim_lsp.clangd.setup {
 		"clangd",
 		"--background-index",
 		"-j=8",
-		"--header-insertion=never"
+		"--header-insertion=never",
 	},
 	filetypes = {"c", "cpp", "objc", "objcpp"},
 }
 
-nvim_lsp.pylsp.setup {
-    on_attach=on_attach,
-    filetypes = {'python'},
-    settings = {
-        configurationSources = {"flake8"},
-        formatCommand = {"black"},
-        pylsp = {
-            plugins = {
-                pyflakes={enabled=true},
-                pylint = {args = {'--ignore=E501,E231', '-'}, enabled=true, debounce=200},
-                pylsp_mypy={enabled=false},
-                pycodestyle={
-                    enabled=true,
-                    ignore={'E501', 'E231'},
-                    maxLineLength=120
-                },
-                yapf={enabled=true}
-            }
-        }
-    }
-}
+nvim_lsp.pyright.setup {}
 
-vim.lsp.set_log_level("trace")
+vim.lsp.set_log_level("debug")
 
 -- Auto-recompile plugins on plugins.lua change
 -- Colorscheme

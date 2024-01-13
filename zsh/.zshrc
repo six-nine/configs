@@ -2,6 +2,9 @@ fpath+=~/.zfunc
 
 export ZSH="$HOME/.oh-my-zsh"
 
+pip install cowsay > /dev/null
+cowsay -t "Hello, $(whoami)"
+
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source ~/.zshaddons
