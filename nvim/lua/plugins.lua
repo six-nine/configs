@@ -15,8 +15,11 @@ local packer = require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use 'lukas-reineke/indent-blankline.nvim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
   use 'joshdick/onedark.vim' -- Theme inspired by Atom
+  use { "catppuccin/nvim", as = "catppuccin" }
   use 'sainnhe/sonokai'
+
   use {
   'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
@@ -33,7 +36,11 @@ local packer = require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = { {'nvim-lua/plenary.nvim'} }
-}
+  }
+
+  use {
+    'NLKNguyen/papercolor-theme'
+  }
   
 end)
 

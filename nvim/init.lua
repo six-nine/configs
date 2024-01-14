@@ -7,26 +7,11 @@
 -- require('init')
 require('plugins')
 
-vim.wo.number = true
---vim.o.breakindent = true
-
---Set colorscheme (order is important here)
-require("bluloco").setup({
-  style = "auto",               -- "auto" | "dark" | "light"
-  transparent = true,
-  italics = false,
-  terminal = vim.fn.has("gui_running") == 1, -- bluoco colors are enabled in gui terminals per default.
-  guicursor   = true,
-})
-
 vim.opt.termguicolors = true
-vim.cmd('colorscheme bluloco')
+vim.wo.number = true
 
--- Set statusbar
-vim.g.lightline = {
-	colorscheme = 'bluloco',
-	active = { left = { { 'mode', 'paste' }, { 'readonly', 'filename', 'modified' } } },
-}
+-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+vim.cmd.colorscheme "catppuccin-macchiato"
 
 --Map blankline
 vim.g.indent_blankline_char = '┊'
