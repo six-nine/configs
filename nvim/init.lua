@@ -70,7 +70,7 @@ nvim_lsp.clangd.setup {
 	cmd = {
 		"clangd",
 		"--background-index",
-		"-j=8",
+		"-j=4",
 		"--header-insertion=never",
 	},
 	filetypes = {"c", "cpp", "objc", "objcpp"},

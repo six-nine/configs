@@ -6,6 +6,7 @@ pip install cowsay > /dev/null
 cowsay -t "Hello, $(whoami)"
 
 ZSH_THEME="robbyrussell"
+ZSH_DISABLE_COMPFIX=true
 plugins=(git)
 source ~/.zshaddons
 source $ZSH/oh-my-zsh.sh
