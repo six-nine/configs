@@ -76,7 +76,9 @@ nvim_lsp.clangd.setup {
 	filetypes = {"c", "cpp", "objc", "objcpp"},
 }
 
-nvim_lsp.pyright.setup {}
+nvim_lsp.pyright.setup {
+	on_attach = on_attach,
+}
 
 vim.lsp.set_log_level("debug")
 

@@ -1,3 +1,5 @@
+# zmodload zsh/zprof # uncomment for profiling
+
 fpath+=~/.zfunc
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,10 +10,9 @@ ZSH_THEME="agnoster"
 ZSH_DISABLE_COMPFIX=true
 plugins=(
     git
-    zsh-syntax-highlighting
-    fast-syntax-highlighting
-    zsh-autosuggestions
-    zsh-autocomplete
+    #fast-syntax-highlighting
+    #zsh-autosuggestions
+    # zsh-autocomplete
 )
 source ~/.zshaddons
 source $ZSH/oh-my-zsh.sh
@@ -21,3 +22,5 @@ if [[ -z "$TMUX"  ]] && [ "$SSH_CONNECTION" != ""  ]; then
 fi
 
 bindkey "^X\x7f" backward-kill-line
+
+# zprof # uncomment for profiling
