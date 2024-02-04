@@ -2,12 +2,17 @@ fpath+=~/.zfunc
 
 export ZSH="$HOME/.oh-my-zsh"
 
-pip install cowsay > /dev/null
-cowsay -t "Hello, $(whoami)"
+export PATH="$PATH:/home/vadickozlov/.local/bin/"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 ZSH_DISABLE_COMPFIX=true
-plugins=(git)
+plugins=(
+    git
+    zsh-syntax-highlighting
+    fast-syntax-highlighting
+    zsh-autosuggestions
+    zsh-autocomplete
+)
 source ~/.zshaddons
 source $ZSH/oh-my-zsh.sh
 
