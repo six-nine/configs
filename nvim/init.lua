@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 vim.wo.number = true
 
 -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd.colorscheme "catppuccin-latte"
 
 --Map blankline
 vim.g.indent_blankline_char = '┊'
@@ -28,12 +28,11 @@ vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 
 vim.opt.smartindent = true
-vim.opt.colorcolumn = '100'
+vim.opt.colorcolumn = '120'
 
 vim.opt.backspace = 'indent,eol,start'
 
--- vim.cmd 'filetype plugin indent on'
-
+vim.cmd 'filetype plugin indent on'
 
 -- LSP settings
 local nvim_lsp = require 'lspconfig'
@@ -70,25 +69,36 @@ nvim_lsp.clangd.setup {
 	cmd = {
 		"clangd",
 		"--background-index",
-		"-j=4",
+        "--log=info",
+        "--pretty",
+		"-j=8",
+        "--clang-tidy",
 		"--header-insertion=never",
 	},
-	filetypes = {"c", "cpp", "objc", "objcpp"},
+	filetypes = {"c", "cpp"},
 }
 
-nvim_lsp.pyright.setup {
-	on_attach = on_attach,
+nvim_lsp.pylsp.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        plugins = {
+            jedi = { 
+                extra_paths = {
+                    '/home/vadickozlov/arcadia',
+                }
+            },
+            pycodestyle = {
+                ignore = {'E501'},
+                maxLineLength = 120
+            },
+        }
+    }
 }
 
-vim.lsp.set_log_level("debug")
-
--- Auto-recompile plugins on plugins.lua change
--- Colorscheme
+vim.lsp.set_log_level("info")
 
 -- Extra useful functions
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -192,6 +202,7 @@ cmp.setup({
 
 	},
 })
+
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
@@ -250,3 +261,23 @@ vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
 vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
+
+require("lualine").setup({
+  sections = {
+    lualine_c = {
+      require('lsp-progress').progress,
+    },
+  }
+})
+
+-- listen lsp-progress event and refresh lualine
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  group = "lualine_augroup",
+  pattern = "LspProgressStatusUpdated",
+  callback = require("lualine").refresh,
+})
+
+require("bufferline").setup{}
+
+vim.opt.signcolumn = "yes"
