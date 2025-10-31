@@ -13,7 +13,6 @@ local packer = require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'saadparwaiz1/cmp_luasnip'
-  use 'lukas-reineke/indent-blankline.nvim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   use 'joshdick/onedark.vim' -- Theme inspired by Atom
@@ -57,6 +56,9 @@ local packer = require('packer').startup(function(use)
     'akinsho/bufferline.nvim',
     tag = "*",
     requires = 'nvim-tree/nvim-web-devicons'
+  }
+  use {
+    "HiPhish/nvim-ts-rainbow2"
   }
 end)
 

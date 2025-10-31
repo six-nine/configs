@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 vim.wo.number = true
 
 -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "catppuccin-macchiato"
 
 --Map blankline
 vim.g.indent_blankline_char = '┊'
@@ -33,6 +33,14 @@ vim.opt.colorcolumn = '120'
 vim.opt.backspace = 'indent,eol,start'
 
 vim.cmd 'filetype plugin indent on'
+
+vim.diagnostic.config({
+  virtual_text = false
+})
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- LSP settings
 local nvim_lsp = require 'lspconfig'
@@ -78,23 +86,12 @@ nvim_lsp.clangd.setup {
 	filetypes = {"c", "cpp"},
 }
 
-nvim_lsp.pylsp.setup{
+nvim_lsp.pyright.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = {
-        plugins = {
-            jedi = { 
-                extra_paths = {
-                    '/home/vadickozlov/arcadia',
-                }
-            },
-            pycodestyle = {
-                ignore = {'E501'},
-                maxLineLength = 120
-            },
-        }
-    }
 }
+
+nvim_lsp.protols.setup {}
 
 vim.lsp.set_log_level("info")
 
@@ -254,6 +251,12 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
+  rainbow = {
+    enable = false,
+    -- list of languages you want to disable the plugin for
+    -- disable = { "jsx", "cpp" },
+    max_file_lines = 3000
+  }
 }
 
 local telescope = require('telescope.builtin')
