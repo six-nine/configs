@@ -5,115 +5,138 @@
 ------------------------------------------------------------------------------
 
 -- require('init')
-require('plugins')
+require("plugins")
 
 vim.opt.termguicolors = true
 vim.wo.number = true
 
 -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd.colorscheme("catppuccin-macchiato")
 
 --Map blankline
-vim.g.indent_blankline_char = '┊'
-vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
-vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
-vim.g.indent_blankline_char_highlight = 'LineNr'
+vim.g.indent_blankline_char = "┊"
+vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
+vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
+vim.g.indent_blankline_char_highlight = "LineNr"
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 -- TAB
 vim.opt.smarttab = true
 vim.opt.expandtab = true
-vim.opt.tabstop = 4 
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 
 vim.opt.smartindent = true
-vim.opt.colorcolumn = '120'
+vim.opt.colorcolumn = "120"
 
-vim.opt.backspace = 'indent,eol,start'
+vim.opt.backspace = "indent,eol,start"
 
-vim.cmd 'filetype plugin indent on'
+vim.cmd("filetype plugin indent on")
 
 vim.diagnostic.config({
-  virtual_text = false
+	virtual_text = false,
 })
 
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 
 -- LSP settings
-local nvim_lsp = require 'lspconfig'
+local nvim_lsp = require("lspconfig")
 local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+	local opts = { noremap = true, silent = true }
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>wl",
+		"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+		opts
+	)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	-- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>e",
+		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
+		opts
+	)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>so",
+		[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]],
+		opts
+	)
+	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-nvim_lsp.clangd.setup {
+nvim_lsp.clangd.setup({
 	on_attach = on_attach,
 	cmd = {
 		"clangd",
 		"--background-index",
-        "--log=info",
-        "--pretty",
+		"--log=info",
+		"--pretty",
 		"-j=8",
-        "--clang-tidy",
+		"--clang-tidy",
 		"--header-insertion=never",
 	},
-	filetypes = {"c", "cpp"},
-}
+	filetypes = { "c", "cpp" },
+})
 
-nvim_lsp.pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+nvim_lsp.pyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
-nvim_lsp.protols.setup {}
+-- nvim_lsp.protols.setup({})
 
 vim.lsp.set_log_level("info")
 
 -- Extra useful functions
 
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require("luasnip")
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
-local import_cmp, cmp = pcall(require, 'cmp')
-if not import_cmp then return end
+local import_cmp, cmp = pcall(require, "cmp")
+if not import_cmp then
+	return
+end
 
-local import_luasnip, luasnip = pcall(require, 'luasnip')
-if not import_luasnip then return end
-
+local import_luasnip, luasnip = pcall(require, "luasnip")
+if not import_luasnip then
+	return
+end
 
 cmp.setup({
 
 	snippet = {
-		expand = function(args) luasnip.lsp_expand(args.body) end,
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
 	},
 
 	formatting = {
@@ -126,7 +149,7 @@ cmp.setup({
 			end
 
 			-- limit completion width
-			local ELLIPSIS_CHAR = '…'
+			local ELLIPSIS_CHAR = "…"
 			local MAX_LABEL_WIDTH = 35
 			local label = vim_item.abbr
 			local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
@@ -147,32 +170,31 @@ cmp.setup({
 	},
 
 	sources = {
-		{name = 'nvim_lsp'},
-		{name = 'nvim_lsp_signature_help' },
-		{name = 'nvim_lua'},
-		{name = 'path'},
-		{name = 'luasnip'},
-		{name = 'buffer', keyword_length = 1},
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "nvim_lua" },
+		{ name = "path" },
+		{ name = "luasnip" },
+		{ name = "buffer", keyword_length = 1 },
 	},
 
 	window = {
 		documentation = {
-			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
+			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 		},
 		completion = {
-			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
-		}
+			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+		},
 	},
-
 })
 
 cmp.setup({
 	mapping = {
-		['<C-Space>'] = cmp.mapping.complete({}),
-		['<C-e>'] = cmp.mapping.close(),
-		['<C-u>'] = cmp.mapping.scroll_docs(-4),
-		['<C-d>'] = cmp.mapping.scroll_docs(4),
-		['<CR>'] = cmp.mapping.confirm({
+		["<C-Space>"] = cmp.mapping.complete({}),
+		["<C-e>"] = cmp.mapping.close(),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = false,
 		}),
@@ -185,7 +207,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, {"i", "s"}),
+		end, { "i", "s" }),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -195,92 +217,102 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, {"i", "s"}),
-
+		end, { "i", "s" }),
 	},
 })
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true, -- false will disable the whole extension
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
-    },
-  },
-  indent = {
-    enable = true,
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-  },
-  rainbow = {
-    enable = false,
-    -- list of languages you want to disable the plugin for
-    -- disable = { "jsx", "cpp" },
-    max_file_lines = 3000
-  }
-}
+require("nvim-treesitter.configs").setup({
+	highlight = {
+		enable = true, -- false will disable the whole extension
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
+	indent = {
+		enable = true,
+	},
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+			keymaps = {
+				-- You can use the capture groups defined in textobjects.scm
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+			},
+		},
+		move = {
+			enable = true,
+			set_jumps = true, -- whether to set jumps in the jumplist
+			goto_next_start = {
+				["]m"] = "@function.outer",
+				["]]"] = "@class.outer",
+			},
+			goto_next_end = {
+				["]M"] = "@function.outer",
+				["]["] = "@class.outer",
+			},
+			goto_previous_start = {
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+			},
+			goto_previous_end = {
+				["[M"] = "@function.outer",
+				["[]"] = "@class.outer",
+			},
+		},
+	},
+	rainbow = {
+		enable = false,
+		-- list of languages you want to disable the plugin for
+		-- disable = { "jsx", "cpp" },
+		max_file_lines = 3000,
+	},
+})
 
-local telescope = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
-vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
-vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
-vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
+local telescope = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", telescope.find_files, {})
+vim.keymap.set("n", "<leader>fg", telescope.live_grep, {})
+vim.keymap.set("n", "<leader>fb", telescope.buffers, {})
+vim.keymap.set("n", "<leader>fh", telescope.help_tags, {})
 
 require("lualine").setup({
-  sections = {
-    lualine_c = {
-      require('lsp-progress').progress,
-    },
-  }
+	sections = {
+		lualine_c = {
+			require("lsp-progress").progress,
+		},
+	},
 })
 
 -- listen lsp-progress event and refresh lualine
 vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
 vim.api.nvim_create_autocmd("User", {
-  group = "lualine_augroup",
-  pattern = "LspProgressStatusUpdated",
-  callback = require("lualine").refresh,
+	group = "lualine_augroup",
+	pattern = "LspProgressStatusUpdated",
+	callback = require("lualine").refresh,
 })
 
-require("bufferline").setup{}
+require("bufferline").setup({})
 
 vim.opt.signcolumn = "yes"
+
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		python = { "black" },
+	},
+})
+
+vim.keymap.set({'n', 'v'}, '<leader>f', function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = 'Format buffer' })

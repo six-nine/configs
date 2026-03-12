@@ -15,9 +15,7 @@ local packer = require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
-  use 'joshdick/onedark.vim' -- Theme inspired by Atom
   use { "catppuccin/nvim", as = "catppuccin" }
-  use 'sainnhe/sonokai'
 
   use {
   'nvim-neo-tree/neo-tree.nvim',
@@ -29,18 +27,8 @@ local packer = require('packer').startup(function(use)
     }
   }
   use {
-    'uloco/bluloco.nvim',
-    requires = { 'rktjmp/lush.nvim' }
-  }
-  use {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use {
-    'NLKNguyen/papercolor-theme'
-  }
-  use {
-    'sonph/onehalf'
   }
   use {
     'nvim-lualine/lualine.nvim',
@@ -60,6 +48,12 @@ local packer = require('packer').startup(function(use)
   use {
     "HiPhish/nvim-ts-rainbow2"
   }
+  use({
+    "stevearc/conform.nvim", -- formatter
+    config = function()
+      require("conform").setup()
+    end,
+  })
 end)
 
 return packer
