@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 vim.wo.number = true
 
 -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd.colorscheme("catppuccin-latte")
 
 --Map blankline
 vim.g.indent_blankline_char = "┊"
@@ -313,6 +313,6 @@ require("conform").setup({
 	},
 })
 
-vim.keymap.set({'n', 'v'}, '<leader>f', function()
+vim.keymap.set({'n', 'v'}, '<leader>F', function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = 'Format buffer' })
