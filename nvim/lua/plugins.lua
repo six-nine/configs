@@ -54,6 +54,9 @@ local packer = require('packer').startup(function(use)
       require("conform").setup()
     end,
   })
+  use {
+    "lukas-reineke/indent-blankline.nvim"
+  }
 end)
 
 return packer

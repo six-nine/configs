@@ -316,3 +316,5 @@ require("conform").setup({
 vim.keymap.set({'n', 'v'}, '<leader>F', function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = 'Format buffer' })
+
+require("ibl").setup()
